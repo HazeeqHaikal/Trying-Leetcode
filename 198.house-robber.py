@@ -64,23 +64,17 @@ class Solution(object):
         # dp[i] = max(dp[i-1], dp[i-2] + nums[i])
         # dp[0] = nums[0]
         # dp[1] = max(nums[0], nums[1])
+        # example array: [3, 2, 1, 5]
 
-        if not nums:
-            return 0
+        rob1, rob2 = 0, 0
 
-        if len(nums) == 1:
-            return nums[0]
+        # [rob1, rob2, n, n+1, ...]
+        for n in nums:
+            temp = max(rob1 + n, rob2)
+            rob1 = rob2
+            rob2 = temp
 
-        # dp is the max amount of money you can rob from 0 to i
-        dp = [0 for _ in range(len(nums))]
-
-        dp[0] = nums[0]
-        dp[1] = max(nums[0], nums[1])
-
-        for idx in range(2, len(nums)):
-            dp[idx] = max(dp[idx-1], dp[idx-2] + nums[idx])
-
-        return dp[-1]
+        return rob2
         
 # @lc code=end
 
