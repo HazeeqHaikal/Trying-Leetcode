@@ -39,6 +39,8 @@
 
 
 # @lc code=start
+from collections import defaultdict
+
 class Solution(object):
     def containsDuplicate(self, nums):
         """
@@ -74,16 +76,23 @@ class Solution(object):
         #     seen.add(num)
         # return False
 
-        # try sorting
-        sortedArray = sorted(nums)
-        left, right = 0, 1
-        while right < len(sortedArray):
-            if sortedArray[left] == sortedArray[right]:
+        numbers = defaultdict(list)
+        for num in nums:
+            if num in numbers:
                 return True
-            left += 1
-            right += 1
+            numbers[num] = 1
+
+        # try sorting
+        # O(n log n)
+        # sortedArray = sorted(nums)
+        # left, right = 0, 1
+        # while right < len(sortedArray):
+        #     if sortedArray[left] == sortedArray[right]:
+        #         return True
+        #     left += 1
+        #     right += 1
         
-        return False
+        # return False
 
 
 # @lc code=end
